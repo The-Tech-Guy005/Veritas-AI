@@ -13,19 +13,24 @@ async def upload_document(file: UploadFile = File(...)):
     filename = file.filename or "uploaded_file"
     content = await file.read()
     if len(content) > settings.max_upload_mb * 1024 * 1024:
-        raise HTTPException(status_code=413, detail=f"File exceeds {settings.max_upload_mb} MB limit.")
+        raise HTTPException(status_code=413, detail="File exceeds configured upload size limit.")
     try:
-        text = extract_text(filename, content)
-        chunks = chunk_text(text)
+        extracted = extract_text(filename, content)
+        chunks = chunk_text(extracted)
         if not chunks:
-            raise ValueError("No extractable text found in the uploaded file.")
+            raise ValueError("No text could be extracted from this file.")
         document_id = str(uuid4())
         count = add_chunks(document_id, filename, chunks)
-        return {"document_id": document_id, "filename": filename, "chunks_added": count, "status": "indexed"}
+        return {
+            "document_id": document_id,
+            "filename": filename,
+            "chunks_added": count,
+            "status": "indexed"
+        }
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Document processing failed: {type(exc).__name__}")
+        raise HTTPException(status_code=500, detail="Document processing failed: " + type(exc).__name__)
 
 @router.get("/documents")
 def documents():

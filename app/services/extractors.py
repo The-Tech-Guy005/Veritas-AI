@@ -6,10 +6,10 @@ from docx import Document
 
 SUPPORTED = {".pdf", ".docx", ".txt", ".csv"}
 
-def extract_text(filename: str, content: bytes) -> str:
+def extract_text(filename, content):
     suffix = Path(filename).suffix.lower()
     if suffix not in SUPPORTED:
-        raise ValueError(f"Unsupported file type: {suffix}. Supported: PDF, DOCX, TXT, CSV.")
+        raise ValueError("Unsupported file type. Upload PDF, DOCX, TXT or CSV.")
     if suffix == ".pdf":
         with fitz.open(stream=content, filetype="pdf") as pdf:
             return "\n".join(page.get_text() for page in pdf)
@@ -19,6 +19,6 @@ def extract_text(filename: str, content: bytes) -> str:
     if suffix == ".txt":
         return content.decode("utf-8-sig", errors="replace")
     if suffix == ".csv":
-        df = pd.read_csv(io.BytesIO(content), dtype=str).fillna("")
-        return df.to_csv(index=False)
-    raise ValueError("Unsupported file type")
+        frame = pd.read_csv(io.BytesIO(content), dtype=str).fillna("")
+        return frame.to_csv(index=False)
+    raise ValueError("Unsupported file type.")

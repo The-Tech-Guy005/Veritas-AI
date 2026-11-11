@@ -6,4 +6,9 @@ router = APIRouter()
 
 @router.post("/research", response_model=ResearchResponse)
 def research(request: ResearchRequest):
-    return run_research(request.query, request.include_web, request.top_k)
+    return run_research(
+        request.query,
+        include_web=request.include_web,
+        include_knowledge_base=request.include_knowledge_base,
+        top_k=request.top_k
+    )

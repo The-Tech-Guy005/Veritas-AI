@@ -1,17 +1,18 @@
 from app.config import settings
 
-def chunk_text(text: str) -> list[str]:
+def chunk_text(text):
     text = " ".join(text.split())
     if not text:
         return []
-    size, overlap = settings.chunk_size, settings.chunk_overlap
-    chunks, start = [], 0
+    size = settings.chunk_size
+    overlap = min(settings.chunk_overlap, max(0, size // 2))
+    output, start = [], 0
     while start < len(text):
         end = min(start + size, len(text))
-        chunk = text[start:end].strip()
-        if chunk:
-            chunks.append(chunk)
-        if end == len(text):
+        piece = text[start:end].strip()
+        if piece:
+            output.append(piece)
+        if end >= len(text):
             break
-        start = max(0, end - overlap)
-    return chunks
+        start = end - overlap
+    return output
