@@ -102,3 +102,4 @@ def get_trace(task_id: str):
     if not trace:
         raise HTTPException(status_code=404, detail=f"Task trace for '{task_id}' not found.")
     return trace
+

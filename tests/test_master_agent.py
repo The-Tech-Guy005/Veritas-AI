@@ -36,3 +36,4 @@ def test_master_agent_end_to_end_orchestration():
     stored_trace = get_task_trace(res.task_id)
     assert stored_trace is not None
     assert stored_trace["task_id"] == res.task_id
+

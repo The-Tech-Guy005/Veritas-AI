@@ -41,3 +41,4 @@ def test_nonilion_webhook_clarification_handling():
     reply = handle_nonilion_webhook(payload)
     assert reply.status_update == "clarification_needed"
     assert "Clarification" in reply.text
+

@@ -90,3 +90,4 @@ def test_score_claim_and_aggregate():
     assert aggregate.label == "heuristic"
     assert aggregate.verified_claims_count == 1
     assert "heuristic" in aggregate.explanation
+

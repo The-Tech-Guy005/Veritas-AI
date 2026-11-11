@@ -145,3 +145,4 @@ def decompose_query(query: str, include_web: bool = True, include_kb: bool = Tru
         subtasks=subtasks,
         estimated_effort="high" if len(subtasks) >= 4 else "medium"
     )
+

@@ -287,3 +287,4 @@ def generate_pdf_report(
         "file_size_bytes": file_size,
         "download_url": f"/master/reports/{report_id}/pdf"
     }
+

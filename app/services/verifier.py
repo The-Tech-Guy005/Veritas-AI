@@ -143,3 +143,4 @@ def verify_evidence_and_claims(
 
     strength_score = compute_aggregate_evidence_strength(records)
     return records, strength_score
+

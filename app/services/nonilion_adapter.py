@@ -236,3 +236,4 @@ def get_nonilion_status() -> NonilionStatusResponse:
         polling_active=nonilion_state.polling_active,
         last_poll_at=nonilion_state.last_poll_at
     )
+

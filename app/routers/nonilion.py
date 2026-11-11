@@ -58,3 +58,4 @@ def stop_poller():
     """
     poller_instance.stop()
     return {"status": "stopped", "polling_active": False}
+

@@ -145,3 +145,4 @@ def generate_synthesis(
 
     detailed = "\n".join(detail_lines)
     return exec_summary, detailed, citations, unique_limitations
+

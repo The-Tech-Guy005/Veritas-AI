@@ -36,3 +36,4 @@ def test_pdf_report_generation():
     # Clean up test artifact if desired
     if os.path.exists(report_meta["file_path"]):
         os.remove(report_meta["file_path"])
+
